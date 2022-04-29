@@ -1,11 +1,8 @@
 classdef thermalZone
-    %
-    %
-    
     properties
-        totalPower
+        totalPower = 0.0
         zoneItemList = containers.Map()
-        zoneName
+        zoneName = ''
     end
     
     methods
@@ -17,30 +14,29 @@ classdef thermalZone
             end
         end
         
-        function addmultiItem(obj, number, varargin)
+        function zoneItem = addmultiItem(varargin)
             
+            itemMap = containers.Map();
             p = inputParser;
             validpars = @(x) isnumeric(x) && isscalar(x) && (x > 0);
-            p.addParameter('power', validpars)
-            p.addRequired('name', @isstring);
-            p.addParameter('category', @isstring);
-            p.addParameter('pw-range', @isstring);
-            p.addParameter('schedule', @isstring);
+            addParameter(p, 'power', 0.0, validpars);
+            addOptional(p, 'number', 1, validpars);
+            addParameter(p, 'name', '.', @ischar);
+            addParameter(p, 'category', 'default', @ischar);
+            addParameter(p, 'prange', '.', @ischar);
+            addParameter(p, 'schedule', '.', @ischar);
             parse(p, varargin{:});
             
             
-            itemStruct = struct('number', 1, 'category', p.Results.category, 'power range', p.Results.pw-range, 'schedule', p.Results.schedule);
-            
-            
-            if ~ number
-                obj.zoneItemList(p.Results.name) = itemStruct;
-            else
-                itemStruct.number = number;
-                obj.zoneItemList(p.Results.name) = itemStruct;
+            itemStruct = struct('number', p.Results.number, 'category', p.Results.category, 'prange', p.Results.prange, 'schedule', p.Results.schedule);
+            if p.Results.number
+                itemMap(p.Results.name) = itemStruct;
+                zoneItem = itemMap;
             end
-            
             return
         end
+        
+        
         
     end
 end
