@@ -18,7 +18,36 @@ classdef electricalGadget
             return
         end
         
-        function 
+        function power = getPower(obj)
+            arguments
+               obj electricalGadget 
+            end
+            power = obj.power;
+            return
+        end
+        
+        function name = getName(obj)
+           arguments
+              obj electricalGadget 
+           end
+           name = obj.name;
+           return
+        end
+        
+        function schedule = getSchedule(obj)
+            arguments
+               obj electricalGadget 
+            end
+            schedule = obj.schedule;
+            scheduleRange = schedule.split(";");
+            for i = 1:length(scheduleRange)
+                indvTime = scheduleRange(i).split("-");
+                sTime = indvTime(1);
+                eTime =  indvTime(2); 
+            end
+            
+        end
+        
 %         function repr = representItem(obj)
 %             arguments
 %                 obj
