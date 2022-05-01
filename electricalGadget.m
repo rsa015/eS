@@ -34,17 +34,28 @@ classdef electricalGadget
            return
         end
         
-        function schedule = getSchedule(obj)
+        function schedule = getSchedule(obj, schHolder)
             arguments
-               obj electricalGadget 
+               obj electricalGadget
+               schHolder cell;
             end
-            schedule = obj.schedule;
-            scheduleRange = schedule.split(";");
+            schedules = obj.schedule;
+            scheduleRange = schedules.split(";");
             for i = 1:length(scheduleRange)
                 indvTime = scheduleRange(i).split("-");
-                sTime = indvTime(1);
-                eTime =  indvTime(2); 
+                
+                sStr = sprintf('%s', indvTime(1));
+%                 disp(sStr);
+                sTime = strcat(sStr(1:2), ":", sStr(3:4));
+                eStr = sprintf('%s', indvTime(2)); 
+                eTime = strcat(eStr(1:2), ":", eStr(3:4));
+%                 sTime = 
+                startT = duration(sTime, 'InputFormat', 'hh:mm');
+                endT = duration(eTime, 'InputFormat', 'hh:mm');
+                schHolder{i} = [startT, endT];
             end
+            schedule = schHolder;
+            return 
             
         end
         
