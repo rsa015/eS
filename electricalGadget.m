@@ -1,7 +1,7 @@
 classdef electricalGadget
     
     properties
-        name string
+        name char
         number double {mustBeNumeric}
         power double {mustBeNumeric}
         category string {mustBeMember(category, {'cooling', 'heating', 'lighting', 'equipment'})}
