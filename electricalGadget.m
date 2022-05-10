@@ -2,6 +2,7 @@ classdef electricalGadget
     
     properties
         name string
+        number double {mustBeNumeric}
         power double {mustBeNumeric}
         category string {mustBeMember(category, {'cooling', 'heating', 'lighting', 'equipment'})}
         prange string
@@ -9,12 +10,18 @@ classdef electricalGadget
     end
     
     methods
-        function obj = electricalGadget(name, power, prange, category, schedule)
+%         function this = electricalGadget(name, number, power, prange, category, schedule)
+%             
+%         end
+        function obj = electricalGadget(name, number, power, prange, category, schedule)
             obj.name = name;
+            obj.number = number;
             obj.power = power;
             obj.prange = prange;
             obj.category = category;
             obj.schedule = schedule;
+%             obj = containers.Map(obj.name, struct('name', obj.name, 'number', obj.number, 'prange', obj.prange, 'caetgory', obj.category, 'schedule', obj.schedule));
+            
             return
         end
         
@@ -58,14 +65,21 @@ classdef electricalGadget
             return 
             
         end
-        
-%         function repr = representItem(obj)
-%             arguments
-%                 obj
-%             end
-%             repr = struct('name', obj.name, 'power', obj.power, 'prange', obj.prange, 'category',obj.category, 'schedule', obj.schedule);
-%             return
-%         end
+        function properties = getProps(obj)
+            arguments
+               obj electricalGadget 
+            end
+            properties = struct('number', obj.number, 'power', obj.power, 'prange', obj.prange, 'category', obj.category, 'schedule', obj.schedule);
+            
+            return
+        end
+        function repr = representItem(obj)
+            arguments
+                obj electricalGadget
+            end
+            repr = struct('name', obj.name, 'power', obj.power, 'prange', obj.prange, 'category',obj.category, 'schedule', obj.schedule);
+            return
+        end
     end
 end
 
