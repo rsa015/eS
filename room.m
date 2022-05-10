@@ -14,12 +14,14 @@ classdef room
             return
         end
         
-        function equips = addEquipments(obj, item)
+        function equips = addEquipments(obj, item, schedule)
             arguments
                 obj
                 item electricalGadget
+                schedule string
             end
             itemName = item.getName();
+            item.schedule = schedule;
             obj.equipments(itemName) = item.getProps();
             obj.rObject(obj.name) = obj.equipments;
             equips = obj.rObject;
