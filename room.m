@@ -1,28 +1,38 @@
-classdef room < containers.Map
-    %UNTITLED3 Summary of this class goes here
-    %   Detailed explanation goes here
+classdef room 
     
     properties
-       equipments containers.Map;
-       name string;
+        equipments containers.Map;
+        rObject containers.Map;
+        name char;
     end
     
     methods
-        function obj = room(name, equipments)
+        function obj = room(name)
             obj.name = name;
-            obj.equipments = equipments;
-            
-            obj(obj.name) = obj.equipments;
-            
+            obj.equipments = containers.Map();
+            obj.rObject = containers.Map();
             return
         end
         
-        function addEquipments(obj, item)
+        function equips = addEquipments(obj, item)
             arguments
                 obj
                 item electricalGadget
             end
-            obj.equipments(item.name) = item.getProps();
+            itemName = item.getName();
+            obj.equipments(itemName) = item.getProps();
+            obj.rObject(obj.name) = obj.equipments;
+            equips = obj.rObject;
+            
+            return
+        end
+        
+        function roomData = dataAsTable(obj)
+            arguments
+                obj
+            end
+            roomData = obj.rObject.values;
+            return
         end
     end
 end
