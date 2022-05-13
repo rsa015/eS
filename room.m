@@ -13,28 +13,43 @@ classdef room
             obj.rObject = containers.Map();
             return
         end
-        function equips = addEquipments(obj, item, number, schedule)
+        function addEquipments(obj, item, number, power, schedule)
             arguments
                 obj
                 item electricalGadget
                 number double
-                schedule string
+                power double
+                schedule
             end
-            itemName = item.getName();
-            item.schedule = obj.getSchedule(schedule);
-            item.number = number;
-            obj.equipments(itemName) = item;
-            obj.rObject(obj.name) = obj.equipments;
-            equips = obj.rObject;
             
-            return
+            itemName = item.getName();
+            if length(schedule) > 1
+                item.schedule = obj.getSchedule(schedule);
+            else
+                item.schedule = schedule;
+            end
+            item.number = number;
+            item.power = power;
+            obj.equipments(itemName) = {item.number, item.power, item.prange, item.category, item.schedule};
+            obj.rObject(obj.name) = obj.equipments;
+            
         end
         
-        function roomData = dataAsTable(obj)
+        function roomTable = dataAsTable(obj)
             arguments
                 obj
             end
-            roomData = obj.rObject.values;
+%             roomTable = sprintf(obj.name);
+            data = obj.equipments.values;
+            names = obj.equipments.keys;
+            roomTable = cell2table(data', 'RowNames', names);
+            roomTable = splitvars(roomTable, 'Var1');
+            roomTable.Properties.VariableNames = {'Number', 'Power', 'Power Range', 'Category', 'Schedule'};
+%             for ii = 1:length(vars)
+%                 roomTable.Properties.VariableNames{ii} = varnames{ii};
+%             end
+            roomTable = table(roomTable);
+            roomTable = renamevars(roomTable, 'roomTable', obj.name);
             return
         end
     end
@@ -56,7 +71,6 @@ classdef room
                 endT = duration(eTime, 'InputFormat', 'hh:mm');
                 usageTime{i} = [startT, endT];
             end
-            
             inUse = usageTime;
             return 
         end
