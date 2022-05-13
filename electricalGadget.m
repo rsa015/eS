@@ -5,16 +5,17 @@ classdef electricalGadget
         power double {mustBeNumeric}
         category string {mustBeMember(category, {'cooling', 'heating', 'lighting', 'equipment'})}
         prange string
-        allEquips (1,:) cell
+        number double {mustBeNumeric}
+        schedule
     end
     
     methods
-        function obj = electricalGadget(name, power, prange,category)
+        function obj = electricalGadget(name, power, prange,category, schedule)
             obj.name = upper(name);
             obj.prange = prange;
             obj.power = power;
             obj.category = category;
-            obj.allEquips{end+1} = obj.name;
+            obj.schedule = schedule;
             return
         end
         
