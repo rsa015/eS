@@ -40,6 +40,8 @@ dryer = electricalGadget('dryer', 5, '', 'heating', "");
 
 %% Adding Gadgets to rooms
 allEquips = {light_bulb.name, tv.name, ac.name, fan.name, phone.name, fridge.name, computer.name, water_heater.name, pressing_iron.name, microwave.name, freezer.name, electric_oven.name, blender.name, printer.name, borehole_pump.name, pool_pump.name, water_pump.name, pool_heater.name, audio_equipment.name, projector.name, washer.name, steam_iron.name, dryer.name};
+
+% helperTable = table({zeros(23, 1), zeros(23, 1), zeros(23, 1), zeros(23, 1), zeros(23, 1)}  , 'VariableNames', {'gadgets','Number', 'Power', 'Power Range', 'category', 'Schedule'}, 'RowNames', allEquips');
 %% Standard Room
 
 std_room.addEquipments(light_bulb, 2, 7.5, "0530-0700;1830-2200");
@@ -145,4 +147,66 @@ laundryTable = laundry.dataAsTable();
 %% end
 
 %% Join All table
+allTables = {std_roomTable, two_broomTable, three_broomTable, receptionTable, cinemaTable, kitchenTable, commonAreasTable, laundryTable};
 
+% tbAll = joinMultiTable(allTables);
+% 
+% function allJoined = joinMultiTable(allTables)
+%     arguments
+%         allTables (1,:) cell
+% %         helperTable table
+%     end
+%     Tname = allTables{1}.Properties.VariableNames{1};
+%     name = splitvars(allTables{1}, Tname);
+%     joined = cell(1, length(allTables));
+%     for tble = 2:length(allTables)
+%         
+%         tableName = allTables{tble}.Properties.VariableNames{1};
+%         loop_tname = splitvars(allTables{tble}, tableName);
+%         joined{tble} = outerjoin(name, loop_tname, 'Keys', [1 1], 'MergeKeys', true);
+%         name = loop_tname;
+%         allJoined = cell2table(joined);
+%     end
+%     
+%     return
+% end
+
+
+tableName1 = allTables{1}.Properties.VariableNames{1};
+loop_tname1 = splitvars(allTables{1}, tableName1);
+
+tableName2 = allTables{2}.Properties.VariableNames{1};
+loop_tname2 = splitvars(allTables{2}, tableName2);
+
+tableName3 = allTables{3}.Properties.VariableNames{1};
+loop_tname3 = splitvars(allTables{3}, tableName3);
+
+tableName4 = allTables{4}.Properties.VariableNames{1};
+loop_tname4 = splitvars(allTables{4}, tableName4);
+
+tableName5 = allTables{5}.Properties.VariableNames{1};
+loop_tname5 = splitvars(allTables{5}, tableName5);
+
+tableName6 = allTables{6}.Properties.VariableNames{1};
+loop_tname6 = splitvars(allTables{6}, tableName6);
+
+tableName7 = allTables{7}.Properties.VariableNames{1};
+disp(tableName7);
+loop_tname7 = splitvars(allTables{7}, tableName7);
+
+tableName8 = allTables{8}.Properties.VariableNames{1};
+disp(tableName8);
+loop_tname8 = splitvars(allTables{8}, tableName8);
+
+allTab2 = outerjoin(loop_tname1, loop_tname2, 'Keys', [1 1], 'MergeKeys', true);
+allTab3 = outerjoin(loop_tname3, loop_tname4, 'Keys', [1 1], 'MergeKeys', true);
+allTab4 = outerjoin(loop_tname5, loop_tname6, 'Keys', [1 1], 'MergeKeys', true);
+allTab5 = outerjoin(loop_tname7, loop_tname8, 'Keys', [1 1], 'MergeKeys', true);
+
+comb23 = outerjoin(allTab2, allTab3, 'Keys', [1 1], 'MergeKeys', true);
+comb45 = outerjoin(allTab4, allTab5, 'Keys', [1 1], 'MergeKeys', true);
+% allTab6 = outerjoin(allTab5, loop_tname6, 'Keys', [1 1], 'MergeKeys', true);
+% allTab7 = outerjoin(allTab6, loop_tname7 , 'Keys', [1 1], 'MergeKeys', true);
+% allTab8 = outerjoin(allTab7, loop_tname8, 'Keys', [1 1], 'MergeKeys', true);
+ 
+allComb = outerjoin(comb23, comb45, 'Keys', [1 1], 'MergeKeys', true);
