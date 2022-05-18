@@ -6,7 +6,7 @@ classdef electricalGadget
         category string {mustBeMember(category, {'cooling', 'heating', 'lighting', 'equipment'})}
         prange string
         number double {mustBeNumeric}
-        schedule
+        schedule string
     end
     
     methods
