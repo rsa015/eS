@@ -191,11 +191,11 @@ tableName6 = allTables{6}.Properties.VariableNames{1};
 loop_tname6 = splitvars(allTables{6}, tableName6);
 
 tableName7 = allTables{7}.Properties.VariableNames{1};
-disp(tableName7);
+% disp(tableName7);
 loop_tname7 = splitvars(allTables{7}, tableName7);
 
 tableName8 = allTables{8}.Properties.VariableNames{1};
-disp(tableName8);
+% disp(tableName8);
 loop_tname8 = splitvars(allTables{8}, tableName8);
 
 allTab2 = outerjoin(loop_tname1, loop_tname2, 'Keys', [1 1], 'MergeKeys', true);
@@ -210,3 +210,6 @@ comb45 = outerjoin(allTab4, allTab5, 'Keys', [1 1], 'MergeKeys', true);
 % allTab8 = outerjoin(allTab7, loop_tname8, 'Keys', [1 1], 'MergeKeys', true);
  
 allComb = outerjoin(comb23, comb45, 'Keys', [1 1], 'MergeKeys', true);
+
+
+% tableWritten = writetable(allComb, 'rawData01.xlsx');
