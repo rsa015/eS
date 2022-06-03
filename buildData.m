@@ -43,11 +43,11 @@ allEquips = {light_bulb.name, tv.name, ac.name, fan.name, phone.name, fridge.nam
 % helperTable = table({zeros(23, 1), zeros(23, 1), zeros(23, 1), zeros(23, 1), zeros(23, 1)}  , 'VariableNames', {'gadgets','Number', 'Power', 'Power Range', 'category', 'Schedule'}, 'RowNames', allEquips');
 %% Standard Room
 
-std_room.addEquipments(light_bulb, 2, 7.5, "0530-0730;1830-2230");
-std_room.addEquipments(ac, 1, 1190, "0630-1030;1330-1930;1930-2330;0030-0230");
+std_room.addEquipments(light_bulb, 2, 7.5, "0530-0700;1830-2200");
+std_room.addEquipments(ac, 1, 1190, "0600-1000;1400-1800;2000-2330;2330-0230");
 std_room.addEquipments(phone, 2, 5, "3");
-std_room.addEquipments(tv, 1, 80, "0630-0830;2030-2330");
-std_room.addEquipments(fan, 1, 50, "1430-1830;1930-2330");
+std_room.addEquipments(tv, 1, 80, "0600-0800;2000-2300");
+std_room.addEquipments(fan, 1, 50, "1400-1800;1930-2330");
 std_room.addEquipments(fridge, 1, 85, "0030-2330");
 std_room.addEquipments(computer, 2, 60,"3");
 std_room.addEquipments(water_heater, 1, 3000, ".75");
@@ -69,11 +69,11 @@ std_8 = fillmissing(std_8, 'constant', 0, 'DataVariables', @isnumeric);
 writetable(std_8, 'std_roomYearly.xlsx');
 %% Two BedRoom
 
-two_broom.addEquipments(light_bulb, 3, 15, "0530-0730;1830-2230");
-two_broom.addEquipments(ac, 1, 1120, "0530-0930;1330-1830;2000-2330;0030-0230");
+two_broom.addEquipments(light_bulb, 3, 15, "0530-0700;1830-2200");
+two_broom.addEquipments(ac, 1, 1120, "0600-1000;1400-1800;2000-2330;2330-0230");
 two_broom.addEquipments(phone, 2, 5, "3");
-two_broom.addEquipments(tv, 1, 80, "0630-0830;1930-2300");
-two_broom.addEquipments(fan, 1, 50, "1400-1800;2000-2330");
+two_broom.addEquipments(tv, 1, 80, "0600-0800;2000-2300");
+two_broom.addEquipments(fan, 1, 50, "1400-1800;2000-2300");
 two_broom.addEquipments(fridge, 1, 85, "0030-2330");
 two_broom.addEquipments(computer, 2, 60, "3");
 two_broom.addEquipments(water_heater, 1, 3000, "1");
@@ -98,11 +98,11 @@ tbr_tsTable = fillmissing(tbr_9, 'constant', 0, 'DataVariables', @isnumeric);
 writetable(tbr_tsTable, 'twobedroomYearly.xlsx')
 %% Three BedRoom
 
-three_broom.addEquipments(light_bulb, 3, 15, "0530-0730;1830-2230");
-three_broom.addEquipments(ac, 1, 1120, "0530-0930;1330-1730;1930-2330;0030-0330");
+three_broom.addEquipments(light_bulb, 3, 15, "0530-0730;1830-2200");
+three_broom.addEquipments(ac, 1, 1120, "0600-1000;1400-1800;2000-2330;2330-0230");
 three_broom.addEquipments(phone, 2, 5, "3");
 three_broom.addEquipments(tv, 1, 80, "0530-0730;1930-2330");
-three_broom.addEquipments(fan, 1, 50, "1430-1830;1930-2330");
+three_broom.addEquipments(fan, 1, 50, "1400-1800;1930-2330");
 three_broom.addEquipments(fridge, 1, 85, "0030-2330");
 three_broom.addEquipments(computer, 2, 60, "3");
 three_broom.addEquipments(water_heater, 1, 3000, "1");
@@ -127,16 +127,16 @@ t3br_tsTable = fillmissing(t3br_9, 'constant', 0, 'DataVariables', @isnumeric);
 writetable(t3br_tsTable, 'threebedroomYearly.xlsx')
 %% Kitchen
 
-kitchen.addEquipments(light_bulb, 20, 20, "0330-0730;1530-2230");
-kitchen.addEquipments(tv, 1, 80, "0530-0730;1930-2230");
+kitchen.addEquipments(light_bulb, 20, 20, "0430-0800;1600-2230");
+kitchen.addEquipments(tv, 1, 80, "0600-0800;2000-2300");
 kitchen.addEquipments(freezer, 8, 100, "0030-2330");
 kitchen.addEquipments(phone, 2, 5, "3");
 kitchen.addEquipments(fridge, 2, 150, "0030-2330");
-kitchen.addEquipments(fan, 8, 50, "1330-1730;1930-2330");
+kitchen.addEquipments(fan, 8, 50, "1400-1800;2000-2330");
 kitchen.addEquipments(computer, 2, 60, "3");
-kitchen.addEquipments(ac, 1, 1190, "1030-1830")
+kitchen.addEquipments(ac, 1, 1190, "0600-1000;1400-1800;2000-2330;2330-0200")
 kitchen.addEquipments(electric_oven, 2, 2000, "2");
-kitchen.addEquipments(water_heater, 1, 3000, "1030-1330");
+kitchen.addEquipments(water_heater, 1, 3000, "1100-1400");
 kitchen.addEquipments(blender, 2, 300, "1");
 kitchen.addEquipments(microwave, 2, 600, "1");
 kitchen.addEquipments(water_pump, 2, 1500, "3");
@@ -167,13 +167,13 @@ kts_15 = outerjoin(kts_14, k_tsTable{16}, 'Keys', [1 1], 'MergeKeys', true);
 kts_16 = outerjoin(kts_15, k_tsTable{17}, 'Keys', [1 1], 'MergeKeys', true);
 
 kitchen_tsTable = fillmissing(kts_16, 'constant', 0, 'DataVariables', @isnumeric);
-writetable(kitchen_tsTable, 'kitchenYearly.xlsx')
+writetable(kitchen_tsTable, 'kitchenYearly.xlsx');
 %% Common Areas
 
 common_areas.addEquipments(light_bulb, 40, 20, "1730-2330;0030-0630");
 % common_areas.addEquipments(tv, 1, 80, "0600-0800;2000-2300");
 % common_areas.addEquipments(chiller, 1, 2000, "");
-common_areas.addEquipments(fan, 4, 50, "1030-2030");
+common_areas.addEquipments(fan, 4, 50, "1000-2000");
 % common_areas.addEquipments(phone, 2, 5, "");
 % common_areas.addEquipments(water_heater, 1, 3000, "");
 % common_areas.addEquipments(fridge, 2, 85, "");
@@ -225,7 +225,7 @@ cinema_tsTable = fillmissing(cinema_ts3, 'constant', 0, 'DataVariables', @isnume
 writetable(cinema_tsTable, 'cinemaYearly.xlsx')
 %% Laundry
 
-laundry.addEquipments(light_bulb, 20, 20, "0430-0830;1630-2330");
+laundry.addEquipments(light_bulb, 20, 20, "0430-0800;1600-2300");
 laundry.addEquipments(tv, 1, 80, "6");
 laundry.addEquipments(washer, 8, 250, "0030-2330");
 laundry.addEquipments(dryer, 6, 5, "2");
