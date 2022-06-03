@@ -66,7 +66,7 @@ std_7 = outerjoin(std_6, std_tsTable{8}, 'Keys', [1 1], 'MergeKeys', true);
 std_8 = outerjoin(std_7, std_tsTable{9}, 'Keys', [1 1], 'MergeKeys', true);
 
 std_8 = fillmissing(std_8, 'constant', 0, 'DataVariables', @isnumeric);
-writetable(std_8, 'std_roomYearly.xlsx');
+writetable(std_8, './yearlyData/second_gen/std_roomYearly.xlsx');
 %% Two BedRoom
 
 two_broom.addEquipments(light_bulb, 3, 15, "0530-0700;1830-2200");
@@ -95,7 +95,7 @@ tbr_9 = outerjoin(t3br_8, twobroom_tsTable{10}, 'Keys', [1 1], 'MergeKeys', true
 
 tbr_tsTable = fillmissing(tbr_9, 'constant', 0, 'DataVariables', @isnumeric);
 
-writetable(tbr_tsTable, 'twobedroomYearly.xlsx')
+writetable(tbr_tsTable, './yearlyData/second_gen/twobedroomYearly.xlsx')
 %% Three BedRoom
 
 three_broom.addEquipments(light_bulb, 3, 15, "0530-0730;1830-2200");
@@ -124,7 +124,7 @@ t3br_9 = outerjoin(t3br_8, threebroom_tsTable{10}, 'Keys', [1 1], 'MergeKeys', t
 
 t3br_tsTable = fillmissing(t3br_9, 'constant', 0, 'DataVariables', @isnumeric);
 
-writetable(t3br_tsTable, 'threebedroomYearly.xlsx')
+writetable(t3br_tsTable, './yearlyData/second_gen/threebedroomYearly.xlsx')
 %% Kitchen
 
 kitchen.addEquipments(light_bulb, 20, 20, "0430-0800;1600-2230");
@@ -167,7 +167,7 @@ kts_15 = outerjoin(kts_14, k_tsTable{16}, 'Keys', [1 1], 'MergeKeys', true);
 kts_16 = outerjoin(kts_15, k_tsTable{17}, 'Keys', [1 1], 'MergeKeys', true);
 
 kitchen_tsTable = fillmissing(kts_16, 'constant', 0, 'DataVariables', @isnumeric);
-writetable(kitchen_tsTable, 'kitchenYearly.xlsx');
+writetable(kitchen_tsTable, './yearlyData/second_gen/kitchenYearly.xlsx');
 %% Common Areas
 
 common_areas.addEquipments(light_bulb, 40, 20, "1730-2330;0030-0630");
@@ -186,7 +186,7 @@ cAreas_1 = outerjoin(cAreas_tsTable{1}, cAreas_tsTable{2}, 'Keys', [1 1], 'Merge
 
 c_AreastsTable = fillmissing(cAreas_1, 'constant', 0, 'DataVariables', @isnumeric);
 
-writetable(c_AreastsTable, 'cAreasYearly.xlsx')
+writetable(c_AreastsTable, './yearlyData/second_gen/cAreasYearly.xlsx')
 %% Reception
 
 reception.addEquipments(light_bulb, 6, 20, "1730-2330;0030-0630");
@@ -206,7 +206,7 @@ rcp_4 = outerjoin(rcp_3, r_tsTable{5}, 'Keys', [1 1], 'MergeKeys', true);
 
 reception_tsTable = fillmissing(rcp_4, 'constant', 0, 'DataVariables', @isnumeric);
 
-writetable(reception_tsTable, 'receptionYearly.xlsx')
+writetable(reception_tsTable, './yearlyData/second_gen/receptionYearly.xlsx')
 %% Cinema
 
 cinema.addEquipments(light_bulb, 4, 15, "3");
@@ -222,7 +222,7 @@ cinema_ts2 = outerjoin(cinema_ts1, cin_tsTable{3}, 'Keys', [1 1], 'MergeKeys', t
 cinema_ts3 = outerjoin(cinema_ts2, cin_tsTable{4}, 'Keys', [1 1], 'MergeKeys', true);
 
 cinema_tsTable = fillmissing(cinema_ts3, 'constant', 0, 'DataVariables', @isnumeric);
-writetable(cinema_tsTable, 'cinemaYearly.xlsx')
+writetable(cinema_tsTable, './yearlyData/second_gen/cinemaYearly.xlsx')
 %% Laundry
 
 laundry.addEquipments(light_bulb, 20, 20, "0430-0800;1600-2300");
@@ -241,7 +241,7 @@ lTs4 = outerjoin(lTs3, laundry_tsTable{5}, 'Keys', [1 1], 'MergeKeys', true);
 
 l_tsTable = fillmissing(lTs4, 'constant', 0, 'DataVariables', @isnumeric);
 
-writetable(l_tsTable, 'laundryYearly.xlsx')
+writetable(l_tsTable, './yearlyData/second_gen/laundryYearly.xlsx')
 %% end
 
 %% Join All table
