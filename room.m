@@ -189,23 +189,23 @@ classdef room
         end
         
         function ytsTable = getYearlyTable(obj)
-           arguments
-               obj room
-           end
-           tble = obj.getEqpYeary();
+            arguments
+                obj room
+            end
+            tble = obj.getEqpYeary();
             tbles = {1, length(tble)};
             for ii = 1:length(tble)
                 tb = tble{ii};
                 tb1 = tb{1};
-%                 fprintf('%d\n', size(tb1(:)));
+    %                 fprintf('%d\n', size(tb1(:)));
                 tb3 = tb{3};
-%                 fprintf('%d\n', size(tb3(:)));
+    %                 fprintf('%d\n', size(tb3(:)));
                 tbles{ii} = table(tb3(:), tb1(:), 'VariableNames', {'Time', 'a'});
                 tbles{ii} = renamevars(tbles{ii}, 'a', tb{2});
             end
-            
+
             ytsTable = tbles;
-           
+
         end
     end
     
@@ -259,7 +259,7 @@ classdef room
                     for iii = 1:length(randT)
                         th = sprintf('%d', randT(iii));
                         tString = th+":00";
-                        useTime{iii} = (duration(tString, 'InputFormat', 'hh:mm'):hours(timestamp): duration(tString, 'InputFormat', 'hh:mm') + hours(double(schedule)))';
+                        useTime{iii} = (duration(tString, 'InputFormat', 'hh:mm'):hours(timestamp): duration(tString, 'InputFormat', 'hh:mm') + hours(double(timestamp)))';
                     end
                     inUse = useTime;
                 end
