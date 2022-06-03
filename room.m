@@ -25,7 +25,7 @@ classdef room
             item.schedule = schedule;
             item.number = number;
             item.power = power;
-            obSchedule = room.getSchedule(item.schedule);
+            obSchedule = room.getSchedule(item.schedule, 1);
             obj.equipments(itemName) = {item.number, item.power, item.prange, item.category, obSchedule};
             obj.rObject(obj.name) = obj.equipments;
             
@@ -223,7 +223,7 @@ classdef room
             empTable = table(rData, zeros(rowLength,1), zeros(rowLength,1), zeros(rowLength, 1), zeros(rowLength, 1), 'VariableNames', varName);
             timeSeriesTable = empTable;
         end
-        function inUse = getSchedule(schedule)
+        function inUse = getSchedule(schedule, timestamp)
 %             arguments
 %                schedule string; 
 %             end
@@ -239,7 +239,7 @@ classdef room
                     eTime = strcat(eStr(1:2), ":", eStr(3:4)); 
                     startT = duration(sTime, 'InputFormat', 'hh:mm');
                     endT = duration(eTime, 'InputFormat', 'hh:mm');
-                    usageTime{i} = (startT:hours(.5):endT)';
+                    usageTime{i} = (startT:hours(timestamp):endT)';
                 end
                 inUse = usageTime;
             elseif length(scheduleRange) == 1
@@ -248,18 +248,18 @@ classdef room
                     useTime = {};
                     randString = sprintf("%d", randT)+":"+"00";
                     if double(schedule) > 0.5
-                        useTime{1} = (duration(randString, 'InputFormat','hh:mm'):hours(.5):duration(randString, 'InputFormat', "hh:mm")+hours(1))';
+                        useTime{1} = (duration(randString, 'InputFormat','hh:mm'):hours(timestamp):duration(randString, 'InputFormat', "hh:mm")+hours(1))';
                     else
-                        useTime{1} = (duration(randString, 'InputFormat', "hh:mm")+hours(.5))';
+                        useTime{1} = (duration(randString, 'InputFormat', "hh:mm")+hours(timestamp))';
                     end
                     inUse = useTime;
                 else
-                    randT = randi([0 12], 1);
+                    randT = randi([0 11], 1);
                     useTime = {1, length(randT)};
                     for iii = 1:length(randT)
                         th = sprintf('%d', randT(iii));
                         tString = th+":00";
-                        useTime{iii} = (duration(tString, 'InputFormat', 'hh:mm'):hours(.5): duration(tString, 'InputFormat', 'hh:mm') + hours(double(schedule)))';
+                        useTime{iii} = (duration(tString, 'InputFormat', 'hh:mm'):hours(timestamp): duration(tString, 'InputFormat', 'hh:mm') + hours(double(schedule)))';
                     end
                     inUse = useTime;
                 end
