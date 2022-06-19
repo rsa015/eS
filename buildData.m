@@ -10,6 +10,7 @@ reception = room('reception');
 three_broom = room('three bedroom');
 two_broom = room('two bedroom');
 std_room = room('Standard rooms');
+community_load =  room('local hub');
 
 
 %% ElectricalGadget definition
@@ -37,10 +38,10 @@ projector = electricalGadget('projector', 600, '', 'equipment', "");
 washer = electricalGadget('washer', 0.0, '', 'equipment', '');
 steam_iron = electricalGadget('steam iron', 2000, '', 'heating', "");
 dryer = electricalGadget('dryer', 5, '', 'heating', "");
-radio = electricalGadget('radio', 1 , '', "equipment", "")
+radio = electricalGadget('radio', 1 , '', "equipment", "");
 
 %% Adding Gadgets to rooms
-allEquips = {light_bulb.name, tv.name, ac.name, fan.name, phone.name, fridge.name, computer.name, water_heater.name, pressing_iron.name, microwave.name, freezer.name, electric_oven.name, blender.name, printer.name, borehole_pump.name, pool_pump.name, water_pump.name, pool_heater.name, audio_equipment.name, projector.name, washer.name, steam_iron.name, dryer.name};
+allEquips = {light_bulb.name, tv.name, ac.name, fan.name, phone.name, fridge.name, computer.name, water_heater.name, pressing_iron.name, microwave.name, freezer.name, electric_oven.name, blender.name, printer.name, borehole_pump.name, pool_pump.name, water_pump.name, pool_heater.name, audio_equipment.name, projector.name, washer.name, steam_iron.name, dryer.name, radio.name};
 
 % helperTable = table({zeros(23, 1), zeros(23, 1), zeros(23, 1), zeros(23, 1), zeros(23, 1)}  , 'VariableNames', {'gadgets','Number', 'Power', 'Power Range', 'category', 'Schedule'}, 'RowNames', allEquips');
 %% Standard Room
@@ -147,6 +148,19 @@ laundry.addEquipments(steam_iron, 2, 2000, "1100-1600");
 laundryTable = laundry.dataAsTable();
 %% local hub
 
+community_load.addEquipments(light_bulb, 2, 7.5, "0530-0700;1830-2200");
+community_load.addEquipments(radio, 1, 1, "0600-0800;2000-2300");
+community_load.addEquipments(phone, 2, 5, "3")
+
+community_load.dataAsTable();
+localHub = community_load.getYearlyTable();
+
+
+localHub_ts1 = outerjoin(localHub{1}, localHub{2}, 'Keys', [1 1], 'MergeKeys', true);
+localHub_ts2 = outerjoin(localHub_ts1, localHub{3}, 'Keys', [1 1], 'MergeKeys', true);
+
+localHub_ts = fillmissing(localHub_ts2, 'constant', 0, 'DataVariables', @isnumeric);
+writetable(localHub_ts, './yearlyData/community_load.xlsx')
 %% Join All table
 allTables = {std_roomTable, two_broomTable, three_broomTable, receptionTable, cinemaTable, kitchenTable, commonAreasTable, laundryTable};
 
